@@ -1,19 +1,13 @@
 package com.company.api.search.google;
 
-import com.company.api.search.DataEntity;
 import com.company.api.search.SearchEngine;
-import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class GoogleSearchEngine implements SearchEngine {
@@ -28,7 +22,6 @@ public class GoogleSearchEngine implements SearchEngine {
     @Override
     public GoogleDataTable search(@NotNull String request) {
         try {
-            String urlStr = generateRequestUrl(request);
             String response = "";
 
             //BufferedReader reader = new BufferedReader(new InputStreamReader(((new URL(urlStr)).openConnection()).getInputStream(), StandardCharsets.UTF_8));
@@ -36,7 +29,7 @@ public class GoogleSearchEngine implements SearchEngine {
             //System.out.println(" buffer = " + reader.readLine());
 
 
-            URL urlObj = new URL(urlStr);
+            URL urlObj = new URL(generateRequestUrl(request));
 
             HttpsURLConnection connection = (HttpsURLConnection) urlObj.openConnection();
 
@@ -63,7 +56,23 @@ public class GoogleSearchEngine implements SearchEngine {
         return API_URL +
                 "?key=" + API_KEY +
                 "&cx=" + PROGRAMMABLE_SEARCH_ENGINE +
-                "&q=" + request;
+                "&q=" + formatText(request);
+    }
+
+    private String formatText(String text) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == ' ')
+                builder.append("+");
+            else
+                builder.append(text.charAt(i));
+        }
+        return builder.toString();
+    }
+
+    @Override
+    public String getSearchEngineInfo() {
+        return "Google Search Engine";
     }
 }
 

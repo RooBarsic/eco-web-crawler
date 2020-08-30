@@ -40,7 +40,7 @@ public class GoogleDataTable implements DataTable {
 
     @Override
     public int getEntityNumber() {
-        return entityList.size();
+        return Math.min(3, entityList.size());
     }
 
     @Override
