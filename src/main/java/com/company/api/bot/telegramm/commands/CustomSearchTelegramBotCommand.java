@@ -45,7 +45,7 @@ public class CustomSearchTelegramBotCommand extends DefaultAbsSender implements 
             String buffer[] = command.split("/custom ", 2);
             command = buffer[1];
 
-            System.setProperty("webdriver.chrome.driver", LINUX_CHROME_DRIVER_PATH);
+            System.setProperty("webdriver.chrome.driver", WINDOWS_CHROME_DRIVER_PATH);
             WebDriver driver = new ChromeDriver();
             driver.get("https://www.google.com/search?q=" + command);
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
