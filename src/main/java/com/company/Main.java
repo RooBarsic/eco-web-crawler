@@ -26,9 +26,10 @@ public class Main {
 
     public static void runBot() {
         ApiContextInitializer.init();
-        //TelegramBot testBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
-        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
-        testBot.botConnect();
+        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
+        productionBot.botConnect();
+        //TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
+        //testBot.botConnect();
     }
 
     public static void exampleGoogle() {

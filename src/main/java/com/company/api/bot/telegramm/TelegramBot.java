@@ -73,6 +73,13 @@ public class TelegramBot extends TelegramLongPollingBot {
         System.out.println("    Number of uniq users : " + userSet.size());
         System.out.println("    Number of active child threads : " + numberOfActiveChildThread.get());
 
+        try {
+            // send report to admin chat
+            REPORT_COMMAND.executeCommand(chatId, user);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
         TelegramBotCommand foundedBotCommand = HELP_COMMAND;
         for (TelegramBotCommand botCommand : botCommandsList) {
             if (botCommand.parseCommand(inputText)) {
@@ -84,12 +91,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             // waiting for free threads
         }
 
-        try {
-            // send report to admin chat
-            REPORT_COMMAND.executeCommand(chatId, user);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
 
         TelegramBotCommand botCommand = foundedBotCommand.copyThis();
         new Thread(() -> {
