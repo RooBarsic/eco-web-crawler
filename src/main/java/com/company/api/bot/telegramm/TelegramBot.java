@@ -1,11 +1,7 @@
 package com.company.api.bot.telegramm;
 
-import com.company.api.bot.telegramm.commands.HelpTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.ReportTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.RequestTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.StartTelegramBotCommand;
+import com.company.api.bot.telegramm.commands.*;
 import com.company.api.search.SearchEngine;
-import com.company.api.search.google.GoogleSearchEngine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,8 +41,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         HELP_COMMAND = new HelpTelegramBotCommand(getOptions(), botToken);
         botCommandsList = new ArrayList<>();
         botCommandsList.add(new StartTelegramBotCommand(getOptions(), botToken));
+        botCommandsList.add(new CustomSearchTelegramBotCommand(getOptions(), getBotToken()));
         botCommandsList.add(HELP_COMMAND);
-        botCommandsList.add(new RequestTelegramBotCommand(getOptions(), botToken, searchEngine));
+        ///botCommandsList.add(new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngine));
         REPORT_COMMAND = new ReportTelegramBotCommand(getOptions(), botToken);
     }
 
