@@ -15,12 +15,13 @@ import java.util.List;
 
 public class ExecuteSearchEngineTelegramBotCommand extends DefaultAbsSender implements TelegramBotCommand {
     private final String botToken;
-    private final SearchEngine searchEngine;
+    private final List<SearchEngine> searchEngines;
 
-    public ExecuteSearchEngineTelegramBotCommand(DefaultBotOptions options, final String botToken, final SearchEngine searchEngine) {
+    public ExecuteSearchEngineTelegramBotCommand(DefaultBotOptions options, final String botToken, final List<SearchEngine> searchEngines) {
         super(options);
         this.botToken = botToken;
-        this.searchEngine = searchEngine;
+        this.searchEngines = new ArrayList<>();
+        this.searchEngines.addAll(searchEngines);
     }
 
     @Override
@@ -34,7 +35,14 @@ public class ExecuteSearchEngineTelegramBotCommand extends DefaultAbsSender impl
             return false;
         }
         try {
+            SearchEngine searchEngine = searchEngines.get(0);
             DataTable dataTable = searchEngine.search(command);
+            for (int i = 0; i < searchEngines.size(); i++) {
+                searchEngine = searchEngines.get(i);
+                dataTable = searchEngine.search(command);
+                if (dataTable.getEntityNumber() > 1)
+                    break;
+            }
 
 
             execute(new SendMessage()
@@ -42,17 +50,18 @@ public class ExecuteSearchEngineTelegramBotCommand extends DefaultAbsSender impl
                     .setText("from " + searchEngine.getSearchEngineInfo())
             );
 
-            for (int i = 0; i < dataTable.getEntityNumber(); i++) {
+            for (int i = 0; i < 3 && i < dataTable.getEntityNumber(); i++) {
                 List<List<InlineKeyboardButton>> keyboardMarkup = new ArrayList<>();
                 keyboardMarkup.add(new ArrayList<>());
 
                 DataEntity entity = dataTable.getEntity(i);
                 String text = entity.getTitle() + "\n\n" + entity.getOverview();
+                String url = entity.getUrl();
                 keyboardMarkup
                         .get(0)
                         .add(new InlineKeyboardButton()
                                 .setText("Link")
-                                .setUrl(entity.getUrl())
+                                .setUrl(url)
                         );
 
                 execute(new SendMessage()
@@ -81,7 +90,7 @@ public class ExecuteSearchEngineTelegramBotCommand extends DefaultAbsSender impl
 
     @Override
     public TelegramBotCommand copyThis() {
-        return new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngine);
+        return new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngines);
     }
 
     @Override

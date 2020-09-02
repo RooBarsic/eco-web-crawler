@@ -3,6 +3,7 @@ package com.company;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.openqa.selenium.TakesScreenshot;
@@ -10,6 +11,7 @@ import org.openqa.selenium.TakesScreenshot;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 
 public class Test {
     public static void run() throws IOException {
@@ -23,7 +25,10 @@ public class Test {
         System.out.println("title = " + page.getTitleText());
         HtmlElement productNode = ((HtmlElement) page
                 .getFirstByXPath("//*[@itemtype='https://schema.org/Product']"));
-        System.out.println(" element = " + page.asXml());
+
+
+        System.out.println(" element = " + page.asText());
+
         URL imageUrl = new URL((((HtmlElement) productNode.getFirstByXPath("./img")))
                 .getAttribute("src"));
         HtmlElement offers = ((HtmlElement) productNode.getFirstByXPath("./span[@itemprop='offers']"));

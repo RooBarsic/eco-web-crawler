@@ -33,7 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Setter
     private String botToken;
 
-    public TelegramBot(String botName, String botToken, SearchEngine searchEngine) {
+    public TelegramBot(String botName, String botToken, List<SearchEngine> searchEngines) {
         this.botName = botName;
         this.botToken = botToken;
 
@@ -41,9 +41,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         HELP_COMMAND = new HelpTelegramBotCommand(getOptions(), botToken);
         botCommandsList = new ArrayList<>();
         botCommandsList.add(new StartTelegramBotCommand(getOptions(), botToken));
-        botCommandsList.add(new CustomSearchTelegramBotCommand(getOptions(), getBotToken()));
+        //botCommandsList.add(new CustomSearchTelegramBotCommand(getOptions(), getBotToken()));
         botCommandsList.add(HELP_COMMAND);
-        ///botCommandsList.add(new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngine));
+        botCommandsList.add(new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngines));
         REPORT_COMMAND = new ReportTelegramBotCommand(getOptions(), botToken);
     }
 

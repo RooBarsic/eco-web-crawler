@@ -3,10 +3,14 @@ package com.company;
 import com.company.api.bot.telegramm.TelegramBot;
 import com.company.api.search.DataEntity;
 import com.company.api.search.DataTable;
+import com.company.api.search.SearchEngine;
+import com.company.api.search.custom.CustomSearcherEngine;
 import com.company.api.search.google.GoogleSearchEngine;
 import org.telegram.telegrambots.ApiContextInitializer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     private static final String PRODUCTION_BOT_NAME = "EcoWebCrawler_bot";
@@ -25,11 +29,15 @@ public class Main {
     }
 
     public static void runBot() {
+        List<SearchEngine> searchEngineList = new ArrayList<>();
+        searchEngineList.add(new CustomSearcherEngine());
+        searchEngineList.add(new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
+
         ApiContextInitializer.init();
-        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
+        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, searchEngineList);
         productionBot.botConnect();
-        //TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
-        //testBot.botConnect();
+//        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, searchEngineList);
+//        testBot.botConnect();
     }
 
     public static void exampleGoogle() {
