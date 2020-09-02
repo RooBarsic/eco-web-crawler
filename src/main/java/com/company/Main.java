@@ -41,10 +41,10 @@ public class Main {
         searchEngineList.add(new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
 
         ApiContextInitializer.init();
-//        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, searchEngineList);
-//        productionBot.botConnect();
-        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, searchEngineList);
-        testBot.botConnect();
+        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, searchEngineList);
+        productionBot.botConnect();
+//        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, searchEngineList);
+//        testBot.botConnect();
     }
 
     public static void exampleGoogle() {
