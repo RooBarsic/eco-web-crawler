@@ -14,18 +14,25 @@ import java.util.List;
 
 public class Main {
     private static final String PRODUCTION_BOT_NAME = "EcoWebCrawler_bot";
-    private static final String PRODUCTION_BOT_TOKEN = "1346750236:AAGZQMFv0TKp4ssMUubVcTLXIlF1Q2ETrS8";
+    private static String PRODUCTION_BOT_TOKEN;
     private static final String TESTING_BOT_NAME = "DManager_test_bot";
-    private static final String TESTING_BOT_TOKEN = "1114508757:AAHckjMgGFrO2wHw-deNPD0yZGf4KqTSTHU";
-    private static final String GOOGLE_SEARCH_ENGINE_TOKEN = "AIzaSyCxPAxCwgtOfWbsew51B74O07VJKGkJRpY";
+    private static String TESTING_BOT_TOKEN;
+    private static String GOOGLE_SEARCH_ENGINE_TOKEN;
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Hello web. ");
+        initTokens();
 
         runBot();
 
         //Test.run();
         //ScreenShot.run();
+    }
+
+    public static void initTokens() {
+        PRODUCTION_BOT_TOKEN = System.getenv("PRODUCTION_BOT_TOKEN");
+        GOOGLE_SEARCH_ENGINE_TOKEN = System.getenv("GOOGLE_SEARCH_ENGINE_TOKEN");
+        TESTING_BOT_TOKEN = System.getenv("TESTING_BOT_TOKEN");
     }
 
     public static void runBot() {
@@ -34,10 +41,10 @@ public class Main {
         searchEngineList.add(new GoogleSearchEngine(GOOGLE_SEARCH_ENGINE_TOKEN));
 
         ApiContextInitializer.init();
-        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, searchEngineList);
-        productionBot.botConnect();
-//        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, searchEngineList);
-//        testBot.botConnect();
+//        TelegramBot productionBot = new TelegramBot(PRODUCTION_BOT_NAME, PRODUCTION_BOT_TOKEN, searchEngineList);
+//        productionBot.botConnect();
+        TelegramBot testBot = new TelegramBot(TESTING_BOT_NAME, TESTING_BOT_TOKEN, searchEngineList);
+        testBot.botConnect();
     }
 
     public static void exampleGoogle() {
