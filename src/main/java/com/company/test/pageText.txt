@@ -1,0 +1,156 @@
+title = Azula - Поиск в Google
+ element =
+Azula - Поиск в Google
+Azula	Поиск
+ВСЕ	КАРТИНКИ	ВИДЕО	НОВОСТИ
+Азула Персонаж
+Азула - вымышленный персонаж и один из главных антагонистов мультсериала Nickelodeon «Аватар: Последний маг воздуха», созданного Майклом Данте ДиМартино и Брайаном Коницко, и озвученного Грэем ДеЛислом. В сериале Азула - принцесса нации огня и... Википедия (Английский язык)
+Первое появление :"The Storm" (2005)
+Титулы :Принцессы; Озай (uncrowned)
+Семья :Озай (Отец); Ursa (Мать); Зуко (older brother); Ikem (Отчим); Kiyi (maternal half-sister)
+Возраст :14 in the series; 15 (The Promise); 16 ( Avatar: The Last Airbender – The Search ); 16 ( Avatar: The Last Airbender – Smoke and Shadow )
+Исполнитель роли :Грей ДеЛайл и Саммер Бишил
+Фильмы и сериалы :Аватар: Легенда об Аанге,Легенда о Корре,Повелитель стихий
+Похожие запросы :Зуко,Катара,Тоф Бейфонг,Сокка
+
+--- new row
+Azula | Avatar Wiki | Fandom https://avatar.fandom.com › wiki › Azula
+Azula was the princess of the Fire Nation, daughter of Fire Lord Ozai and Ursa, younger sister... Azula's relationships · Azula (games) · Film - Azula · Category:Azula images
+
+--- new row
+Азула | Аватар Вики | Fandom https://avatar.fandom.com › wiki › Азула
+Азула - принцесса Народа Огня, дочь Хозяина Огня Озая и принцессы Урсы, младшая сестра Зуко… Магия огня · Саммер Бишил · Дай Ли · Дым и тень, часть 3
+
+--- new row
+Азула | Злодеи вики | Fandom https://zlodei.fandom.com › wiki › Азула
+Азула (англ. Azula) – принцесса Страны Огня и ведущая антагонистка на протяжении 2 и 3 сезонов…
+
+--- new row
+Azula - Wikipedia https://en.wikipedia.org › wiki › Azula
+Azula is a fictional character and one of the main antagonists in Nickelodeon's animated television series Avatar: The Last Airbender, created by Michael Dante  ...
+Картинки Показать все
+Показать все
+
+--- new row
+Азула - Azula - qwe.wiki https://ru.qwe.wiki › wiki › Azula
+Азула продолжает преследовать аватар, Зуко и Айро для остальной части сезона. После того, как ее первоначальный отказ войти Ba Sing Se , используя ... Появление · 1,1 Avatar: The Last Airbender · Характеристика · Личность
+
+--- new row
+Avatar: 15 Things Every Fan Should Know About Azula | ScreenRant https://screenrant.com › Lists
+4 июн. 2020 г. · Classic characters from Aang to Toph to Azula are back, and there is a lot to know about princess Azula. She isn't just a cunning villain; she's ...
+
+Avatar: How Azula Escaped Prison After The Last Airbender Ended https://screenrant.com › SR Originals
+30 мая 2020 г. · Avatar: The Last Airbender villain Azula is sent to an asylum instead of prison in the comic The Search; the firebender escapes to search for ...
+
+Azula's 21 Most SAVAGE Moments in ATLA⚡️| Avatar - YouTube https://www.youtube.com › watch
+Продолжительность: 5:23 Опубликовано: 15 мая 2020 г.
+
+  ВИДЕО
+
+--- new row
+#azula hashtag on Instagram • Photos and Videos https://www.instagram.com › explore › tags › azula
+211.4k Posts - See Instagram photos and videos from 'azula' hashtag.
+
+Похожие запросы
+azula art
+>
+азула в старости
+>
+azula cosplay
+>
+азула рост
+>
+азула и тай ли
+>
+азула и сокка
+>
+азула беременна
+>
+азула арт
+>
+Следующая >
+
+Войти
+Настройки	Конфиденциальность	Условия
+
+
+
+
+
+
+
+
+
+
+
+
+anchors = Cannot find local variable 'anchors'
+this = {CustomSearcherEngine@2444}
+text = "Azula - Поиск в Google\r\nAzula\tПоиск\r\nВСЕ\tКАРТИНКИ\tВИДЕО\tНОВОСТИ\r\nАзула Персонаж \t\r\nАзула - вымышленный персонаж и один из главных антагонистов мультсериала Nickelodeon «Аватар: Последний маг воздуха», созданного Майклом Данте ДиМартино и Брайаном Коницко, и озвученного Грэем ДеЛислом. В сериале Азула - принцесса нации огня и... Википедия (Английский язык)\r\nПервое появление :"The Storm" (2005)\r\nТитулы :Принцессы; Озай (uncrowned)\r\nСемья :Озай (Отец); Ursa (Мать); Зуко (older brother); Ikem (Отчим); Kiyi (maternal half-sister)\r\nВозраст :14 in the series; 15 (The Promise); 16 ( Avatar: The Last Airbender – The Search ); 16 ( Avatar: The Last Airbender – Smoke and Shadow )\r\nИсполнитель роли :Грей ДеЛайл и Саммер Бишил\r\nФильмы и сериалы :Аватар: Легенда об Аанге,Легенда о Корре,Повелитель стихий\r\nПохожие запросы :Зуко,Катара,Тоф Бейфонг,Сокка\r\nAzula | Avatar Wiki | Fandom https://avatar.fandom.com › wiki › Azula\r\nAzula was the princess of the Fire Nation, daughter of Fire Lord Ozai and Ursa"
+rowsList = {ArrayList@4178}  size = 56
+ 0 = "Azula - Поиск в Google\r"
+ 1 = "Azula\tПоиск\r"
+ 2 = "ВСЕ\tКАРТИНКИ\tВИДЕО\tНОВОСТИ\r"
+ 3 = "Азула Персонаж \t\r"
+ 4 = "Азула - вымышленный персонаж и один из главных антагонистов мультсериала Nickelodeon «Аватар: Последний маг воздуха», созданного Майклом Данте ДиМартино и Брайаном Коницко, и озвученного Грэем ДеЛислом. В сериале Азула - принцесса нации огня и... Википедия (Английский язык)\r"
+ 5 = "Первое появление :"The Storm" (2005)\r"
+ 6 = "Титулы :Принцессы; Озай (uncrowned)\r"
+ 7 = "Семья :Озай (Отец); Ursa (Мать); Зуко (older brother); Ikem (Отчим); Kiyi (maternal half-sister)\r"
+ 8 = "Возраст :14 in the series; 15 (The Promise); 16 ( Avatar: The Last Airbender – The Search ); 16 ( Avatar: The Last Airbender – Smoke and Shadow )\r"
+ 9 = "Исполнитель роли :Грей ДеЛайл и Саммер Бишил\r"
+ 10 = "Фильмы и сериалы :Аватар: Легенда об Аанге,Легенда о Корре,Повелитель стихий\r"
+ 11 = "Похожие запросы :Зуко,Катара,Тоф Бейфонг,Сокка\r"
+
+ 12 = "Azula | Avatar Wiki | Fandom https://avatar.fandom.com › wiki › Azula\r"
+ 13 = "Azula was the princess of the Fire Nation, daughter of Fire Lord Ozai and Ursa, younger sister... Azula's relationships · Azula (games) · Film - Azula · Category:Azula images\r"
+
+ 14 = "Азула | Аватар Вики | Fandom https://avatar.fandom.com › wiki › Азула\r"
+ 15 = "Азула - принцесса Народа Огня, дочь Хозяина Огня Озая и принцессы Урсы, младшая сестра Зуко… Магия огня · Саммер Бишил · Дай Ли · Дым и тень, часть 3\r"
+
+ 16 = "Азула | Злодеи вики | Fandom https://zlodei.fandom.com › wiki › Азула\r"
+ 17 = "Азула (англ. Azula) – принцесса Страны Огня и ведущая антагонистка на протяжении 2 и 3 сезонов…\r"
+
+ 18 = "Azula - Wikipedia https://en.wikipedia.org › wiki › Azula\r"
+ 19 = "Azula is a fictional character and one of the main antagonists in Nickelodeon's animated television series Avatar: The Last Airbender, created by Michael Dante  ...\r"
+ 20 = "Картинки Показать все\r"
+ 21 = "Показать все\r"
+
+ 22 = "Азула - Azula - qwe.wiki https://ru.qwe.wiki › wiki › Azula\r"
+ 23 = "Азула продолжает преследовать аватар, Зуко и Айро для остальной части сезона. После того, как ее первоначальный отказ войти Ba Sing Se , используя ...\r"
+
+ 24 = "The Life of Azula: What Happened After the Series? (Avatar ... https://www.youtube.com › watch\r"
+ 25 = "Продолжительность: 22:47 Опубликовано: 24 янв. 2019 г.\r"
+ 26 = "\t\r"
+ 27 = "  ВИДЕО\r"
+
+ 28 = "Azula's 21 Most SAVAGE Moments in ATLA⚡️| Avatar - YouTube https://www.youtube.com › watch\r"
+ 29 = "Продолжительность: 5:23 Опубликовано: 15 мая 2020 г.\r"
+ 30 = "\t\r"
+ 31 = "  ВИДЕО\r"
+
+ 32 = "Avatar: 15 Things Every Fan Should Know About Azula | ScreenRant https://screenrant.com › Lists\r"
+ 33 = "4 июн. 2020 г. · Classic characters from Aang to Toph to Azula are back, and there is a lot to know about princess Azula. She isn't just a cunning villain; she's ...\r"
+
+ 34 = "Avatar: How Azula Escaped Prison After The Last Airbender Ended https://screenrant.com › SR Originals\r"
+ 35 = "30 мая 2020 г. · Avatar: The Last Airbender villain Azula is sent to an asylum instead of prison in the comic The Search; the firebender escapes to search for ...\r"
+ 36 = "Похожие запросы\r"
+ 37 = "azula art \t\r"
+ 38 = ">\r"
+ 39 = "азула в старости \t\r"
+ 40 = ">\r"
+ 41 = "azula cosplay \t\r"
+ 42 = ">\r"
+ 43 = "азула рост \t\r"
+ 44 = ">\r"
+ 45 = "азула и тай ли \t\r"
+ 46 = ">\r"
+ 47 = "азула и сокка \t\r"
+ 48 = ">\r"
+ 49 = "азула беременна \t\r"
+ 50 = ">\r"
+ 51 = "азула арт \t\r"
+ 52 = ">\r"
+ 53 = "Следующая >\r"
+ 54 = "\r"
+ 55 = "Войти\r"
+stringBuilder = {StringBuilder@4179} "Настройки\tКонфиденциальность\tУсловия"

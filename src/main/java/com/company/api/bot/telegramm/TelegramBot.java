@@ -1,11 +1,7 @@
 package com.company.api.bot.telegramm;
 
-import com.company.api.bot.telegramm.commands.HelpTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.ReportTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.RequestTelegramBotCommand;
-import com.company.api.bot.telegramm.commands.StartTelegramBotCommand;
+import com.company.api.bot.telegramm.commands.*;
 import com.company.api.search.SearchEngine;
-import com.company.api.search.google.GoogleSearchEngine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,7 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Setter
     private String botToken;
 
-    public TelegramBot(String botName, String botToken, SearchEngine searchEngine) {
+    public TelegramBot(String botName, String botToken, List<SearchEngine> searchEngines) {
         this.botName = botName;
         this.botToken = botToken;
 
@@ -45,8 +41,9 @@ public class TelegramBot extends TelegramLongPollingBot {
         HELP_COMMAND = new HelpTelegramBotCommand(getOptions(), botToken);
         botCommandsList = new ArrayList<>();
         botCommandsList.add(new StartTelegramBotCommand(getOptions(), botToken));
+        //botCommandsList.add(new CustomSearchTelegramBotCommand(getOptions(), getBotToken()));
         botCommandsList.add(HELP_COMMAND);
-        botCommandsList.add(new RequestTelegramBotCommand(getOptions(), botToken, searchEngine));
+        botCommandsList.add(new ExecuteSearchEngineTelegramBotCommand(getOptions(), botToken, searchEngines));
         REPORT_COMMAND = new ReportTelegramBotCommand(getOptions(), botToken);
     }
 
@@ -76,6 +73,13 @@ public class TelegramBot extends TelegramLongPollingBot {
         System.out.println("    Number of uniq users : " + userSet.size());
         System.out.println("    Number of active child threads : " + numberOfActiveChildThread.get());
 
+        try {
+            // send report to admin chat
+            REPORT_COMMAND.executeCommand(chatId, user);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
         TelegramBotCommand foundedBotCommand = HELP_COMMAND;
         for (TelegramBotCommand botCommand : botCommandsList) {
             if (botCommand.parseCommand(inputText)) {
@@ -87,12 +91,6 @@ public class TelegramBot extends TelegramLongPollingBot {
             // waiting for free threads
         }
 
-        try {
-            // send report to admin chat
-            REPORT_COMMAND.executeCommand(chatId, user);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
 
         TelegramBotCommand botCommand = foundedBotCommand.copyThis();
         new Thread(() -> {
