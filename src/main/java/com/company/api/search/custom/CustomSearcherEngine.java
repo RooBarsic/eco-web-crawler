@@ -22,9 +22,9 @@ public class CustomSearcherEngine implements SearchEngine {
             String productUrl = "https://www.google.com/search?q=" + generateUrlArgument(request);
 
             HtmlPage page = client.getPage(productUrl);
-            System.out.println("title = " + page.getTitleText());
+            //System.out.println("title = " + page.getTitleText());
 
-            System.out.println(" element = " + page.asText());
+            //System.out.println(" element = " + page.asText());
 
             List<String > rows = getRows(page.asText());
 
