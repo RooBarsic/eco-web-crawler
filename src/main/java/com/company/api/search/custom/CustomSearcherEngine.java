@@ -30,7 +30,7 @@ public class CustomSearcherEngine implements SearchEngine {
 
             int idx = 4;
             StringBuilder buffer = new StringBuilder();
-            while(idx < rows.size() && !rows.get(idx).contains("http")) {
+            while(idx < rows.size() && !rows.get(idx).contains("http") && !rows.get(idx).contains("›")) {
                 buffer.append(rows.get(idx)).append("\n");
                 idx++;
             }
@@ -47,7 +47,7 @@ public class CustomSearcherEngine implements SearchEngine {
             }
 
             while(idx < rows.size()) {
-                if (rows.get(idx).contains("http")) {
+                if (rows.get(idx).contains("http") || rows.get(idx).contains("›")) {
                     title = parseTitle(rows.get(idx));
                     url = parseUrl(rows.get(idx));
                     description = parseDescription(rows.get(idx + 1));
@@ -71,8 +71,16 @@ public class CustomSearcherEngine implements SearchEngine {
     }
 
     private String parseTitle(final String row) {
-        String[] buffer = row.split("http", 2);
-        return buffer[0];
+        if (row.contains("http")) {
+            String[] buffer = row.split("http", 2);
+            return buffer[0];
+        }
+        else {
+            String[] buffer = row.split(" › ");
+            buffer = buffer[0].split(" ");
+            final String urlStartPath = buffer[buffer.length - 1];
+            return row.split(urlStartPath, 3)[0];
+        }
     }
 
     private String generateUrlArgument(final String arg) {
@@ -89,13 +97,28 @@ public class CustomSearcherEngine implements SearchEngine {
     private String parseUrl(final String row) {
         System.out.println(" url parser ::: got url : " + row);
         //https://avatar.fandom.com › wiki › Азула
-        String[] buffer = row.split("http", 2);
-        if (buffer.length != 2) {
-            return "-------";
+        //Harry Potter At Home - Wizarding World www.wizardingworld.com › collections › harry-potter-at-home
+        String[] buffer;
+        String[] buffer2;
+        StringBuilder urlBuilder = new StringBuilder();
+        if (row.contains("http")) {
+            buffer = row.split("http", 2);
+            if (buffer.length != 2) {
+                return "-------";
+            }
+            buffer2 = buffer[1].split(" › ");
+            if (row.contains("https"))
+                urlBuilder.append("https");
+            else
+                urlBuilder.append("http");
+        }
+        else {
+            buffer2 = row.split(" › ");
+            buffer = buffer2[0].split(" ");
+            buffer2[0] = buffer[buffer.length - 1];
+            urlBuilder.append("http://");
         }
 
-        StringBuilder urlBuilder = new StringBuilder("http");
-        String[] buffer2 = buffer[1].split(" › ");
         for (int i = 0; i < buffer2.length; i++) {
             urlBuilder.append(removeLastFormatters(buffer2[i])).append("/");
         }
