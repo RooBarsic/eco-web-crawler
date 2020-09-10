@@ -75,6 +75,10 @@
                             <mainClass>com.company.Main</mainClass>
                             <name>workerBot</name>
                         </program>
+                        <program>
+                            <mainClass>com.company.REST</mainClass>
+                            <name>restWorker</name>
+                        </program>
                     </programs>
                 </configuration>
                 <executions>
