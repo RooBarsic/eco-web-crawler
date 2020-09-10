@@ -30,6 +30,7 @@ public class Main {
 
         runBot(searchEngines);
 
+        System.out.println(" port : " + SERVER_PORT);
         runOpenRestHandler(searchEngines);
 
         //Test.run();
