@@ -21,7 +21,7 @@ public class Main {
     private static final String TESTING_BOT_NAME = "DManager_test_bot";
     private static String TESTING_BOT_TOKEN;
     private static String GOOGLE_SEARCH_ENGINE_TOKEN;
-    private static int SERVER_PORT = 8080;
+    private static int SERVER_PORT = 8000;
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Hello web. ");
@@ -41,6 +41,7 @@ public class Main {
         PRODUCTION_BOT_TOKEN = System.getenv("PRODUCTION_BOT_TOKEN");
         GOOGLE_SEARCH_ENGINE_TOKEN = System.getenv("GOOGLE_SEARCH_ENGINE_TOKEN");
         TESTING_BOT_TOKEN = System.getenv("TESTING_BOT_TOKEN");
+        SERVER_PORT = Integer.parseInt(System.getenv("PORT"));
     }
 
     public static List<SearchEngine> initSearchEngines() {
@@ -59,6 +60,7 @@ public class Main {
     }
 
     public static void runOpenRestHandler(final @NotNull List<SearchEngine> searchEngineList) {
+        new Thread(() -> {
             try {
                 HttpServer httpServer = HttpServer.create(new InetSocketAddress(SERVER_PORT), 0);
                 httpServer.createContext(SearchCustomHttpHandlerCommand.API_PATH, new SearchCustomHttpHandlerCommand(searchEngineList));
@@ -68,5 +70,6 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }).start();
     }
 }
