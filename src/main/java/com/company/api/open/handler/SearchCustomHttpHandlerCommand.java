@@ -36,7 +36,7 @@ public class SearchCustomHttpHandlerCommand implements CustomHttpHandlerCommand 
 
                 SearchEngine searchEngine = searchEngineList.get(0);
                 DataTable dataTable = searchEngine.search(query);
-                for (int i = 1; i < searchEngineList.size(); i++) {
+                for (int i = 0; i < searchEngineList.size(); i++) {
                     searchEngine = searchEngineList.get(i);
                     dataTable = searchEngine.search(query);
                     if (dataTable.getEntityNumber() > 1)
