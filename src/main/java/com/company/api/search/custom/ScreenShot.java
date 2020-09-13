@@ -1,4 +1,4 @@
-package com.company;
+package com.company.api.search.custom;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
