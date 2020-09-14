@@ -17,15 +17,16 @@ public class AzureDB implements DataBaseConnection{
     @Override
     public boolean connect() {
         try {
+
             System.out.println("Connecting to the database");
             connection = DriverManager.getConnection(properties.getProperty("url"), properties);
             System.out.println("Database connection COMPLETED test: " + connection.getCatalog());
             return true;
         } catch (SQLException throwables) {
-            System.out.println("Database connection failed ");
             throwables.printStackTrace();
-            return false;
         }
+        System.out.println("Database connection failed ");
+        return false;
     }
 
     @Override
