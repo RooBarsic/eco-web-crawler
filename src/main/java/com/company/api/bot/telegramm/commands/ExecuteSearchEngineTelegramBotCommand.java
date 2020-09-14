@@ -73,10 +73,10 @@ public class ExecuteSearchEngineTelegramBotCommand extends DefaultAbsSender impl
                         )
                 );
 
-                System.out.println(" i = " + i + "\n" +
-                        " : " + entity.getTitle() + "\n" +
-                        " : " + entity.getOverview() + "\n" +
-                        " : " + entity.getUrl() + '\n');
+//                System.out.println(" i = " + i + "\n" +
+//                        " : " + entity.getTitle() + "\n" +
+//                        " : " + entity.getOverview() + "\n" +
+//                        " : " + entity.getUrl() + '\n');
             }
 
 

@@ -43,18 +43,41 @@ public class UsersDataBaseTable {
         }
     }
 
+    public boolean setUserFromDB(final @NotNull UserDAO userDAO) {
+        ResultSet executionResult = dataBaseConnection.executeSearchQuery(
+                "select * from " + TABLE_NAME + " where "
+                        + " login = " + userDAO.getLoginDAO()
+                        + " and "
+                        + " firstName = " + userDAO.getFirstNameDAO()
+                        + " and "
+                        + " lastName = " + userDAO.getLastNameDAO()
+                        + ";");
+        try {
+            if (executionResult != null) {
+                executionResult.next();
+                userDAO.setIncrementRequestsNumber(executionResult.getInt("requestsNumber"));
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     public boolean insertUser(final @NotNull UserDAO user) {
         //insert into users (login, firstName, LastName) values ('test_login', 'test_firstName', 'test_lastName');
         if (searchUser(user))
             return false;
         return dataBaseConnection.executeQuery(
-            "INSERT INTO " + TABLE_NAME + " (login, firstName, lastName) "
+            "INSERT INTO " + TABLE_NAME + " (login, firstName, lastName, requestsNumber) "
                     + "VALUES ("
                     + user.getLoginDAO()
                     + ", "
                     + user.getFirstNameDAO()
                     + ", "
                     + user.getLastNameDAO()
+                    + ", "
+                    + user.getRequestsNumberDAO()
                     + " );");
     }
 

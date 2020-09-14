@@ -2,6 +2,7 @@ package com.company.api.bot.telegramm;
 
 import com.company.api.bot.telegramm.commands.*;
 import com.company.api.db.DataBaseConnection;
+import com.company.api.db.UserDAO;
 import com.company.api.db.UsersDataBaseTable;
 import com.company.api.search.SearchEngine;
 import lombok.Getter;
@@ -116,6 +117,17 @@ public class TelegramBot extends TelegramLongPollingBot {
                 } catch (TelegramApiException ef) {
                     ef.printStackTrace();
                 }
+            }
+
+            UserDAO userDAO = new UserDAO(user.getUserName(), user.getFirstName(), user.getLastName());
+            if (!usersDataBaseTable.searchUser(userDAO)) {
+                userDAO.setIncrementRequestsNumber(1);
+                usersDataBaseTable.insertUser(userDAO);
+            }
+            else {
+                usersDataBaseTable.setUserFromDB(userDAO);
+                userDAO.incrementRequestsNumber();
+                usersDataBaseTable.updateUserRequestNumber(userDAO);
             }
             numberOfActiveChildThread.decrementAndGet();
         }).start();

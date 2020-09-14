@@ -54,4 +54,12 @@ public class UserDAO {
     public int getRequestsNumberDAO() {
         return getRequestsNumber();
     }
+
+    public void incrementRequestsNumber() {
+        requestsNumber++;
+    }
+
+    public void setIncrementRequestsNumber(int requestsNumber) {
+        this.requestsNumber = requestsNumber;
+    }
 }
