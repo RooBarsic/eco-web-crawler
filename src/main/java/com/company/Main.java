@@ -28,6 +28,7 @@ public class Main {
         initTokens();
         final List<SearchEngine> searchEngines = initSearchEngines();
         AzureDB azureDB = new AzureDB(DATA_BASE_PROPERTIES);
+        azureDB.connect();
         UsersDataBaseTable usersDataBaseTable = new UsersDataBaseTable(azureDB);
 
         runBot(searchEngines, usersDataBaseTable);

@@ -30,6 +30,7 @@ public class AzureDB implements DataBaseConnection{
 
     @Override
     public boolean executeQuery(final @NotNull String query) {
+        System.out.println(" Azure query : " + query);
         try {
             return connection.prepareStatement(query).execute();
         } catch (SQLException throwables) {
@@ -40,6 +41,7 @@ public class AzureDB implements DataBaseConnection{
 
     @Override
     public @Nullable ResultSet executeSearchQuery(@NotNull String query) {
+        System.out.println(" Azure query : " + query);
         try {
             return connection.prepareCall(query).executeQuery();
         } catch (SQLException throwables) {
