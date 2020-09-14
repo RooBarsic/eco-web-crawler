@@ -36,11 +36,13 @@ public class UsersDataBaseTable {
                         + " lastName = " + userDAO.getLastNameDAO()
                         + ";");
         try {
-            return executionResult != null ? executionResult.next() : false;
+            if (executionResult != null) {
+                return executionResult.next();
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return false;
         }
+        return false;
     }
 
     public boolean setUserFromDB(final @NotNull UserDAO userDAO) {

@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.api.bot.telegramm.TelegramBot;
 import com.company.api.db.AzureDB;
+import com.company.api.db.UserDAO;
 import com.company.api.db.UsersDataBaseTable;
 import com.company.api.search.SearchEngine;
 import com.company.api.search.custom.CustomSearcherEngine;
