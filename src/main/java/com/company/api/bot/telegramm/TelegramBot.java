@@ -1,10 +1,13 @@
 package com.company.api.bot.telegramm;
 
 import com.company.api.bot.telegramm.commands.*;
+import com.company.api.db.DataBaseConnection;
+import com.company.api.db.UsersDataBaseTable;
 import com.company.api.search.SearchEngine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -25,6 +28,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private ReportTelegramBotCommand REPORT_COMMAND;
     private Set<String> userSet = new HashSet<>();
     private AtomicInteger numberOfActiveChildThread;
+    private UsersDataBaseTable usersDataBaseTable;
 
     @Setter
     @Getter
@@ -33,9 +37,10 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Setter
     private String botToken;
 
-    public TelegramBot(String botName, String botToken, List<SearchEngine> searchEngines) {
+    public TelegramBot(String botName, String botToken, List<SearchEngine> searchEngines, final @NotNull UsersDataBaseTable usersDataBaseTable) {
         this.botName = botName;
         this.botToken = botToken;
+        this.usersDataBaseTable = usersDataBaseTable;
 
         numberOfActiveChildThread = new AtomicInteger(0);
         HELP_COMMAND = new HelpTelegramBotCommand(getOptions(), botToken);
@@ -76,6 +81,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         try {
             // send report to admin chat
             REPORT_COMMAND.executeCommand(chatId, user);
+
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
