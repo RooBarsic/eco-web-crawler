@@ -1,6 +1,5 @@
 package com.company;
 
-import com.company.api.bot.telegramm.TelegramBot;
 import com.company.api.open.handler.HelpCustomHttpHandlerCommand;
 import com.company.api.open.handler.SearchCustomHttpHandlerCommand;
 import com.company.api.search.SearchEngine;
@@ -8,7 +7,6 @@ import com.company.api.search.custom.CustomSearcherEngine;
 import com.company.api.search.google.GoogleSearchEngine;
 import com.sun.net.httpserver.HttpServer;
 import org.jetbrains.annotations.NotNull;
-import org.telegram.telegrambots.ApiContextInitializer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
