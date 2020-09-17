@@ -23,4 +23,6 @@ jobs:
           url: ${{ secrets.URL }}
           user: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
+          GOOGLE_SEARCH_ENGINE_TOKEN: ${{ secrets.GOOGLE_SEARCH_ENGINE_TOKEN }}
+          PORT: ${{ secrets.PORT }}
         run: mvn test
