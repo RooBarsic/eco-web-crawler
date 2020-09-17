@@ -13,9 +13,13 @@ public class AzureDatabaseConnectionTest {
     private final Properties connectionProperties;
 
     public AzureDatabaseConnectionTest() {
-        connectionUrl = System.getenv("url");
-        connectionUserName = System.getenv("user");
-        connectionPassword = System.getenv("password");
+        connectionUrl = System.getenv("URL");
+        connectionUserName = System.getenv("USER");
+        connectionPassword = System.getenv("PASSWORD");
+
+        System.out.println("log -- connectionUrl = " + connectionUrl);
+        System.out.println("log -- connectionUserName = " + connectionUserName);
+        System.out.println("log -- connectionPassword = " + connectionPassword);
 
         connectionProperties = new Properties();
         connectionProperties.setProperty("url", connectionUrl);
