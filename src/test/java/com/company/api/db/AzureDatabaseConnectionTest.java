@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class AzureDatabaseConnectionTest {
@@ -13,7 +12,7 @@ public class AzureDatabaseConnectionTest {
     private final String connectionPassword;
     private final Properties connectionProperties;
 
-    AzureDatabaseConnectionTest() {
+    public AzureDatabaseConnectionTest() {
         connectionUrl = System.getenv("url");
         connectionUserName = System.getenv("user");
         connectionPassword = System.getenv("password");
