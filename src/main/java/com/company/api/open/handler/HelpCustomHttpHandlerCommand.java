@@ -6,8 +6,21 @@ import java.io.IOException;
 
 public class HelpCustomHttpHandlerCommand implements CustomHttpHandlerCommand {
     public static final String API_PATH = "/";
+    public static String DEFAULT_RESPONSE;
 
     public HelpCustomHttpHandlerCommand() {
+        DEFAULT_RESPONSE =
+                "<h3>"
+                + "use like /api/search?q=your+request"
+                + "</h3>"
+                + "<br/>"
+                + "<a href=\""
+                + "/api/search?q=your+request"
+                + "\">"
+                + "/api/search?q=your+request"
+                + "</a>"
+                + "<br/>";
+
     }
 
     @Override
@@ -19,17 +32,7 @@ public class HelpCustomHttpHandlerCommand implements CustomHttpHandlerCommand {
         System.out.println(" --- " + exchange.getRequestMethod());
         if (exchange.getRequestMethod().equals("GET")) {
             responseCode = 200;
-            responseBuilder
-                    .append("<h3>")
-                    .append("use like <br/> /api/search?q=your+request")
-                    .append("</h3>")
-                    .append("<br/>")
-                    .append("<a href=\"")
-                    .append("/api/search?q=your+request")
-                    .append("\">")
-                    .append("/api/search?q=your+request")
-                    .append("</a>")
-                    .append("<br/>");
+            responseBuilder.append(DEFAULT_RESPONSE);
         }
         if (responseCode == 405) {
             responseBuilder.append("Wrong method usage. Use /help");
