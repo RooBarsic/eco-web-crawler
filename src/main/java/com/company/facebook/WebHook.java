@@ -13,9 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -70,7 +67,30 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "  }\n" +
                 "}";
 
-        sendMessage(response);
+        String curlReques = "curl -X POST -H \"Content-Type: application/json\" -d '{\n" +
+                "  \"recipient\":{\n" +
+                "    \"id\":\"" + message.getSenderId() + "\"\n" +
+                "  },\n" +
+                "  \"messaging_type\": \"RESPONSE\",\n" +
+                "  \"message\":{\n" +
+                "    \"text\": \"Pick a color:\",\n" +
+                "    \"quick_replies\":[\n" +
+                "      {\n" +
+                "        \"content_type\":\"text\",\n" +
+                "        \"title\":\"Red\",\n" +
+                "        \"payload\":\"<POSTBACK_PAYLOAD>\",\n" +
+                "        \"image_url\":\"http://example.com/img/red.png\"\n" +
+                "      },{\n" +
+                "        \"content_type\":\"text\",\n" +
+                "        \"title\":\"Green\",\n" +
+                "        \"payload\":\"<POSTBACK_PAYLOAD>\",\n" +
+                "        \"image_url\":\"http://example.com/img/green.png\"\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }\n" +
+                "}' \"https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN + "\"";
+
+        sendMessage(curlReques);
         System.out.println("  sended responce ");
 
         endResponse(exchange, response, responseCode);
@@ -78,26 +98,8 @@ public class WebHook implements CustomHttpHandlerCommand {
 
     public void sendMessage(String message) {
         try {
-//            var values = new HashMap<String, String>() {{
-//                put("name", "John Doe");
-//                put ("occupation", "gardener");
-//            }};
-//
-//            var objectMapper = new ObjectMapper();
-//            String requestBody = objectMapper
-//                    .writeValueAsString(values);
-//
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN))
-                    .POST(HttpRequest.BodyPublishers.ofString(message))
-                    .build();
 
-            HttpResponse<String> response = client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-//
-//            System.out.println(response.body());
-
+            Runtime.getRuntime().exec(message);
 
             URL url = new URL("https://graph.facebook.com/v9.0/me/messages?access_token=<PAGE_ACCESS_TOKEN>");
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -112,8 +114,6 @@ public class WebHook implements CustomHttpHandlerCommand {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
