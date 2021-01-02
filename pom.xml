@@ -93,6 +93,10 @@
                             <mainClass>com.company.REST</mainClass>
                             <name>restWorker</name>
                         </program>
+                        <program>
+                            <mainClass>com.company.FBRest</mainClass>
+                            <name>FacebookWorker</name>
+                        </program>
                     </programs>
                 </configuration>
                 <executions>
