@@ -8,6 +8,7 @@ import com.sun.net.httpserver.HttpExchange;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Scanner;
 
 public class WebHook implements CustomHttpHandlerCommand {
     private int counter = 0;
@@ -22,7 +23,11 @@ public class WebHook implements CustomHttpHandlerCommand {
         Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
 
         System.out.println("params ::");
-        System.out.println(exchange.getRequestURI().getRawQuery());
+        Scanner scanner = new Scanner(exchange.getRequestBody());
+        while (scanner.hasNextLine()) {
+            System.out.println(scanner.nextLine());
+        }
+
         System.out.println("params ::");
         paramByKey.forEach((a, b) -> {
             System.out.println(" key = " + a + " val = " + b);
