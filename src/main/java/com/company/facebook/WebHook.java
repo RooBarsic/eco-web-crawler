@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -83,14 +87,14 @@ public class WebHook implements CustomHttpHandlerCommand {
 //            String requestBody = objectMapper
 //                    .writeValueAsString(values);
 //
-//            HttpClient client = HttpClient.newHttpClient();
-//            HttpRequest request = HttpRequest.newBuilder()
-//                    .uri(URI.create("https://httpbin.org/post"))
-//                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-//                    .build();
-//
-//            HttpResponse<String> response = client.send(request,
-//                    HttpResponse.BodyHandlers.ofString());
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN))
+                    .POST(HttpRequest.BodyPublishers.ofString(message))
+                    .build();
+
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
 //
 //            System.out.println(response.body());
 
@@ -108,6 +112,8 @@ public class WebHook implements CustomHttpHandlerCommand {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
