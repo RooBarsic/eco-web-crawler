@@ -27,15 +27,8 @@ public class WebHook implements CustomHttpHandlerCommand {
         Scanner scanner = new Scanner(exchange.getRequestBody());
         String jsonText = scanner.nextLine();
 
-        JSONObject jsonObject = new JSONObject(jsonText);
-        String resText = jsonObject
-                .getJSONArray("entry")
-                .getJSONObject(0)
-                .getJSONArray("messaging")
-                .getJSONObject(0)
-                .getJSONObject("message")
-                .getString("text");
-        System.out.println(" JSON_TEXT = " + jsonText + "       RESULT_TEXT = " + resText);
+        Message message = new Message(jsonText);
+        System.out.println(message.messageInfo());
 
 
         System.out.println("params ::");
