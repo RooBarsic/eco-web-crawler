@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class WebHook implements CustomHttpHandlerCommand {
     private int counter = 0;
+    private final String VERIFY_TOKEN = "app_2";
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -29,35 +30,12 @@ public class WebHook implements CustomHttpHandlerCommand {
                 System.out.println(" key = " + a + " val = " + b);
             });
 
-//            if (paramByKey.containsKey("q")) {
-//                responseCode = 200;
-//                final String query = paramByKey.get("q");
-//
-//                SearchEngine searchEngine = searchEngineList.get(0);
-//                DataTable dataTable = searchEngine.search(query);
-//                for (int i = 0; i < searchEngineList.size(); i++) {
-//                    searchEngine = searchEngineList.get(i);
-//                    dataTable = searchEngine.search(query);
-//                    if (dataTable.getEntityNumber() > 1)
-//                        break;
-//                }
-//
-//                for (int i = 0; i < dataTable.getEntityNumber(); i++) {
-//                    DataEntity dataEntity = dataTable.getEntity(i);
-//                    responseBuilder
-//                            .append("<h3>")
-//                            .append(dataEntity.getTitle())
-//                            .append("</h3>")
-//                            .append(dataEntity.getOverview())
-//                            .append("<br/>")
-//                            .append("<a href=\"")
-//                            .append(dataEntity.getUrl())
-//                            .append("\">")
-//                            .append(dataEntity.getUrl())
-//                            .append("</a>")
-//                            .append("<br/><br/>");
-//                }
-//            }
+            if (paramByKey.containsKey("hub.mode") && paramByKey.containsKey("hub.verify_token") && paramByKey.containsKey("hub.challenge")) {
+                if (paramByKey.get("hub.mode").equals("subscribe") && paramByKey.get("hub.verify_token").equals(VERIFY_TOKEN)) {
+                    responseCode = 200;
+                    responseBuilder.append(paramByKey.get("hub.challenge"));
+                }
+            }
         }
         if (responseCode == 405) {
             responseBuilder.append("Wrong method usage. Use /help");
