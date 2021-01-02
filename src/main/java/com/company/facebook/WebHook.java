@@ -5,6 +5,7 @@ import com.company.api.search.DataEntity;
 import com.company.api.search.DataTable;
 import com.company.api.search.SearchEngine;
 import com.sun.net.httpserver.HttpExchange;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Map;
@@ -24,9 +25,18 @@ public class WebHook implements CustomHttpHandlerCommand {
 
         System.out.println("params ::");
         Scanner scanner = new Scanner(exchange.getRequestBody());
-        while (scanner.hasNextLine()) {
-            System.out.println(scanner.nextLine());
-        }
+        String jsonText = scanner.nextLine();
+
+        JSONObject jsonObject = new JSONObject(jsonText);
+        String resText = jsonObject
+                .getJSONArray("entry")
+                .getJSONObject(0)
+                .getJSONArray("messaging")
+                .getJSONObject(0)
+                .getJSONObject("message")
+                .getString("text");
+        System.out.println(" JSON_TEXT = " + jsonText + "       RESULT_TEXT = " + resText);
+
 
         System.out.println("params ::");
         paramByKey.forEach((a, b) -> {
