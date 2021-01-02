@@ -4,7 +4,6 @@ import com.company.api.open.handler.CustomHttpHandlerCommand;
 import com.company.api.search.DataEntity;
 import com.company.api.search.DataTable;
 import com.company.api.search.SearchEngine;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import org.json.JSONObject;
 
@@ -12,11 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -100,7 +95,7 @@ public class WebHook implements CustomHttpHandlerCommand {
 //            System.out.println(response.body());
 
 
-            URL url = new URL("https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN);
+            URL url = new URL("https://graph.facebook.com/v9.0/me/messages?access_token=<PAGE_ACCESS_TOKEN>");
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json; utf-8");
