@@ -22,6 +22,8 @@ public class WebHook implements CustomHttpHandlerCommand {
         Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
 
         System.out.println("params ::");
+        System.out.println(exchange.getRequestURI().getRawQuery());
+        System.out.println("params ::");
         paramByKey.forEach((a, b) -> {
             System.out.println(" key = " + a + " val = " + b);
         });
@@ -35,7 +37,6 @@ public class WebHook implements CustomHttpHandlerCommand {
         else {
             responseBuilder.append("Hello Man");
         }
-
         if (responseCode == 405) {
             responseBuilder.append("Wrong method usage. Use /help");
         }
