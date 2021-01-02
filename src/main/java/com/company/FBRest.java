@@ -1,13 +1,19 @@
 package com.company;
 
+import com.company.api.search.DataEntity;
+import com.company.api.search.DataTable;
+import com.company.api.search.SearchEngine;
+import com.company.facebook.WebHook;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Map;
 
 public class FBRest {
 
     private static int SERVER_PORT = 8080;
+    private static Integer counter = 0;
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Hello web. ");
@@ -29,9 +35,7 @@ public class FBRest {
         new Thread(() -> {
             try {
                 HttpServer httpServer = HttpServer.create(new InetSocketAddress(SERVER_PORT), 0);
-                httpServer.createContext("/hello", exchange -> {
-                    System.out.println(" ---- got /hello request");
-                });
+                httpServer.createContext("/hello", new WebHook());
 
                 httpServer.start();
             } catch (IOException e) {
