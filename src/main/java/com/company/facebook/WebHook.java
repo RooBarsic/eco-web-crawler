@@ -4,10 +4,19 @@ import com.company.api.open.handler.CustomHttpHandlerCommand;
 import com.company.api.search.DataEntity;
 import com.company.api.search.DataTable;
 import com.company.api.search.SearchEngine;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -62,8 +71,49 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "  }\n" +
                 "}";
 
-        exchange.getResponseHeaders().set("access_token", PAGE_ACCESS_TOKEN);
 
         endResponse(exchange, response, responseCode);
     }
+
+    public void sendMessage(String message) {
+        try {
+//            var values = new HashMap<String, String>() {{
+//                put("name", "John Doe");
+//                put ("occupation", "gardener");
+//            }};
+//
+//            var objectMapper = new ObjectMapper();
+//            String requestBody = objectMapper
+//                    .writeValueAsString(values);
+//
+//            HttpClient client = HttpClient.newHttpClient();
+//            HttpRequest request = HttpRequest.newBuilder()
+//                    .uri(URI.create("https://httpbin.org/post"))
+//                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+//                    .build();
+//
+//            HttpResponse<String> response = client.send(request,
+//                    HttpResponse.BodyHandlers.ofString());
+//
+//            System.out.println(response.body());
+
+
+            URL url = new URL("https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN);
+            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+            try(OutputStream os = con.getOutputStream()) {
+                byte[] input = message.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
+
