@@ -71,6 +71,8 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "  }\n" +
                 "}";
 
+        sendMessage(response);
+        System.out.println("  sended responce ");
 
         endResponse(exchange, response, responseCode);
     }
