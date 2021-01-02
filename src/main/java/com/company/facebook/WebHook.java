@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class WebHook implements CustomHttpHandlerCommand {
     private int counter = 0;
     private final String VERIFY_TOKEN = "app_2";
+    private static final String PAGE_ACCESS_TOKEN = "EAAPIHznf4dgBAOw9R5YdnsPxX0frtpMc9hhGXXLnzZAgXPwWazNTUT3bc5A7EEcBt9iR3ZBRK3eDBnuZBhP7C5enCYUtblGgDLonFrbbv7CApYLlruNqw7X19btDELLvpld6CVEY9RDK7c46MTGP1WozXOa0Dd9UHZA7NYr7vAZDZD";
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -29,6 +30,7 @@ public class WebHook implements CustomHttpHandlerCommand {
 
         Message message = new Message(jsonText);
         System.out.println(message.messageInfo());
+        System.out.println("JsonText = " + jsonText);
 
 
         System.out.println("params ::");
@@ -49,7 +51,18 @@ public class WebHook implements CustomHttpHandlerCommand {
             responseBuilder.append("Wrong method usage. Use /help");
         }
 
-        endResponse(exchange, responseBuilder.toString(), responseCode);
+        String response = "{\n" +
+                "  \"recipient\":{\n" +
+                "    \"id\":\"<" + message.getRecipientId() + ">\"\n" +
+                "  },\n" +
+                "  \"messaging_type\": \"RESPONSE\",\n" +
+                "  \"message\":{\n" +
+                "    \"text\": \"" + "Salam bro." + "\",\n" +
+                "  }\n" +
+                "}";
 
+        exchange.getResponseHeaders().set("access_token", PAGE_ACCESS_TOKEN);
+
+        endResponse(exchange, response, responseCode);
     }
 }
