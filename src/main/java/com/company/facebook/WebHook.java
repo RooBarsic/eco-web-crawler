@@ -44,6 +44,7 @@ public class WebHook implements CustomHttpHandlerCommand {
             System.out.println(" key = " + a + " val = " + b);
         });
 
+        responseCode = 200;
         if (paramByKey.containsKey("hub.mode") && paramByKey.containsKey("hub.verify_token") && paramByKey.containsKey("hub.challenge")) {
             if (paramByKey.get("hub.mode").equals("subscribe") && paramByKey.get("hub.verify_token").equals(VERIFY_TOKEN)) {
                 responseCode = 200;
