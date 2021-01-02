@@ -20,7 +20,7 @@ public class WebHook implements CustomHttpHandlerCommand {
         final StringBuilder responseBuilder = new StringBuilder();
         int responseCode = 405;
         Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
-        
+
         System.out.println("params ::");
         paramByKey.forEach((a, b) -> {
             System.out.println(" key = " + a + " val = " + b);
@@ -31,6 +31,9 @@ public class WebHook implements CustomHttpHandlerCommand {
                 responseCode = 200;
                 responseBuilder.append(paramByKey.get("hub.challenge"));
             }
+        }
+        else {
+            responseBuilder.append("Hello Man");
         }
 
         if (responseCode == 405) {
