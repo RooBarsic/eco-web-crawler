@@ -24,6 +24,7 @@ public class WebHook implements CustomHttpHandlerCommand {
         int responseCode = 405;
         Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
 
+        System.out.println(" host = " + exchange.getRequestURI().getHost());
         System.out.println("params ::");
         Scanner scanner = new Scanner(exchange.getRequestBody());
         String jsonText = scanner.nextLine();
