@@ -20,7 +20,7 @@ public class FBRest {
 
     public static void main(String[] args) throws IOException {
         System.out.println(" Hello web. ");
-        //initTokens();
+        initTokens();
 
         System.out.println(" port : " + SERVER_PORT);
         runOpenRestHandler();
