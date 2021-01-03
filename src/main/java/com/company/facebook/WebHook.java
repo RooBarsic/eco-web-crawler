@@ -48,7 +48,8 @@ public class WebHook implements CustomHttpHandlerCommand {
         int responseCode = 200;
 
         Scanner scanner = new Scanner(exchange.getRequestBody());
-        String inputDataJson = "null";
+        String inputDataJson = "{\"object\":\"page\",\"entry\":[{\"id\":\"103106818399407\",\"time\":1609604901020,\"messaging\":[{\"sender\":{\"id\":\"4080977395248736\"},\"recipient\":{\"id\":\"103106818399407\"},\"timestamp\":1609604889627,\"message\":{\"mid\":\"m_ToXAQ1xk80K3qQSS2GT1IIYG6QdfzHmKjpsV-VXrfhKiBN_T8AMe1bpqzssrbv1pAPFz-zqft72D5L3RXvIceQ\",\"text\":\"Sabina\"}}]}]}"; //scanner.nextLine();
+
         if (scanner.hasNextLine())
             inputDataJson = scanner.nextLine();
         System.out.println("dataJson : " + inputDataJson);
@@ -71,6 +72,8 @@ public class WebHook implements CustomHttpHandlerCommand {
     public void handle(HttpExchange exchange) throws IOException {
         counter++;
         System.out.println(" ---- got /hello request    counter = " + counter);
+
+        handlePostRequest(exchange);
 
         if (exchange.getRequestMethod().equals("GET")) {
             handleGetRequest(exchange);
