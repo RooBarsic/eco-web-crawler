@@ -61,7 +61,6 @@ public class WebHook implements CustomHttpHandlerCommand {
             new Thread(()->{
                 ECHO_COMMAND.doCommand(message);
             }).start();
-            ECHO_COMMAND.doCommand(message);
         }
 
         endResponse(exchange, "", responseCode);

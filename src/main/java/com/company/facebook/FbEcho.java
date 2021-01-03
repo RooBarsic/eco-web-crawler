@@ -19,13 +19,9 @@ public class FbEcho extends Command {
                 "      {\n" +
                 "        \"content_type\":\"text\",\n" +
                 "        \"title\":\"Red\",\n" +
-                "        \"payload\":\"<POSTBACK_PAYLOAD>\",\n" +
-                "        \"image_url\":\"http://example.com/img/red.png\"\n" +
                 "      },{\n" +
                 "        \"content_type\":\"text\",\n" +
                 "        \"title\":\"Green\",\n" +
-                "        \"payload\":\"<POSTBACK_PAYLOAD>\",\n" +
-                "        \"image_url\":\"http://example.com/img/green.png\"\n" +
                 "      }\n" +
                 "    ]\n" +
                 "  }\n" +
