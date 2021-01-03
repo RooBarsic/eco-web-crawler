@@ -15,20 +15,82 @@ public class WebHook implements CustomHttpHandlerCommand {
     private int counter = 0;
     private final String VERIFY_TOKEN = "app_2";
     private static final String PAGE_ACCESS_TOKEN = "EAAPIHznf4dgBAOw9R5YdnsPxX0frtpMc9hhGXXLnzZAgXPwWazNTUT3bc5A7EEcBt9iR3ZBRK3eDBnuZBhP7C5enCYUtblGgDLonFrbbv7CApYLlruNqw7X19btDELLvpld6CVEY9RDK7c46MTGP1WozXOa0Dd9UHZA7NYr7vAZDZD";
+    private static FbEcho ECHO_COMMAND = new FbEcho();
+
+    public void handleGetRequest(HttpExchange exchange) throws IOException {
+        System.out.println(" ------ Got GET request");
+        final StringBuilder responseBuilder = new StringBuilder();
+        int responseCode = 405;
+        Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
+
+        System.out.println("MAP params ::");
+        paramByKey.forEach((a, b) -> {
+            System.out.println(" key = " + a + " val = " + b);
+        });
+
+        if (paramByKey.containsKey("hub.mode") && paramByKey.containsKey("hub.verify_token") && paramByKey.containsKey("hub.challenge")) {
+            if (paramByKey.get("hub.mode").equals("subscribe") && paramByKey.get("hub.verify_token").equals(VERIFY_TOKEN)) {
+                responseCode = 200;
+                responseBuilder.append(paramByKey.get("hub.challenge"));
+            }
+        }
+
+        if (responseCode == 405) {
+            responseBuilder.append("Wrong method usage. Use /help");
+        }
+
+        endResponse(exchange, responseBuilder.toString(), responseCode);
+        System.out.println(" -------- Sended response to GET message");
+    }
+
+    public void handlePostRequest(HttpExchange exchange) throws IOException {
+        System.out.println(" ------ Got POST request");
+        int responseCode = 200;
+
+        Scanner scanner = new Scanner(exchange.getRequestBody());
+        String inputDataJson = "null";
+        if (scanner.hasNextLine())
+            inputDataJson = scanner.nextLine();
+        System.out.println("dataJson : " + inputDataJson);
+
+        Message message = new Message(inputDataJson);
+        System.out.println("params ::");
+        System.out.println(message.messageInfo());
+
+        if (ECHO_COMMAND.parseCommand(message.getMessageText())) {
+            new Thread(()->{
+                ECHO_COMMAND.doCommand(message);
+            }).start();
+            ECHO_COMMAND.doCommand(message);
+        }
+
+        endResponse(exchange, "", responseCode);
+        System.out.println(" -------- Sended response to POST message");
+    }
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         counter++;
         System.out.println(" ---- got /hello request    counter = " + counter);
+
+        if (exchange.getRequestMethod().equals("GET")) {
+            handleGetRequest(exchange);
+        } else {
+            handlePostRequest(exchange);
+        }
+
+        /*
         final StringBuilder responseBuilder = new StringBuilder();
         int responseCode = 405;
         Map<String, String> paramByKey = splitQuery(exchange.getRequestURI().getRawQuery());
 
         System.out.println(" host = " + exchange.getRequestURI().getHost());
         Scanner scanner = new Scanner(exchange.getRequestBody());
-        String dataJson = scanner.nextLine();
+        String dataJson = "null";
+        if (scanner.hasNextLine())
+            dataJson = scanner.nextLine();
         System.out.println("data : " + dataJson);
-        String jsonText = dataJson; //"{\"object\":\"page\",\"entry\":[{\"id\":\"103106818399407\",\"time\":1609604901020,\"messaging\":[{\"sender\":{\"id\":\"4080977395248736\"},\"recipient\":{\"id\":\"103106818399407\"},\"timestamp\":1609604889627,\"message\":{\"mid\":\"m_ToXAQ1xk80K3qQSS2GT1IIYG6QdfzHmKjpsV-VXrfhKiBN_T8AMe1bpqzssrbv1pAPFz-zqft72D5L3RXvIceQ\",\"text\":\"Sabina\"}}]}]}"; //scanner.nextLine();
+        String jsonText = "{\"object\":\"page\",\"entry\":[{\"id\":\"103106818399407\",\"time\":1609604901020,\"messaging\":[{\"sender\":{\"id\":\"4080977395248736\"},\"recipient\":{\"id\":\"103106818399407\"},\"timestamp\":1609604889627,\"message\":{\"mid\":\"m_ToXAQ1xk80K3qQSS2GT1IIYG6QdfzHmKjpsV-VXrfhKiBN_T8AMe1bpqzssrbv1pAPFz-zqft72D5L3RXvIceQ\",\"text\":\"Sabina\"}}]}]}"; //scanner.nextLine();
 
         Message message = new Message(jsonText);
         System.out.println("params ::");
@@ -63,7 +125,7 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "  },\n" +
                 "  \"messaging_type\": \"RESPONSE\",\n" +
                 "  \"message\":{\n" +
-                "    \"text\": \"Pick a color:\",\n" +
+                "    \"text\": \"" + "Salam bro. You writed : " + message.getMessageText() + "\",\n" +
                 "    \"quick_replies\":[\n" +
                 "      {\n" +
                 "        \"content_type\":\"text\",\n" +
@@ -80,7 +142,7 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "  }\n" +
                 "}' \"https://graph.facebook.com/v9.0/me/messages?access_token=" + PAGE_ACCESS_TOKEN + "\"";
 
-        //sendMessage(curlReques);
+        sendMessage(curlReques);
         System.out.println("  sended responce ");
 
         String response = "{\n" +
@@ -94,9 +156,11 @@ public class WebHook implements CustomHttpHandlerCommand {
                 "}";
 
         endResponse(exchange, response, responseCode);
+         */
     }
 
     public void sendMessage(String message) {
+        System.out.println("\n --------------------   sendMessage");
         String jsonStr = "{\"recipient\":{\"id\":\"4080977395248736\"},\"messaging_type\": \"RESPONSE\",\"message\":{\"text\": \"Pick a color:\",\"quick_replies\":[{\"content_type\":\"text\",\"title\":\"Red\",\"payload\":\"<POSTBACK_PAYLOAD>\",\"image_url\":\"http://example.com/img/red.png\"},{\"content_type\":\"text\",\"title\":\"Green\",\"payload\":\"<POSTBACK_PAYLOAD>\",\"image_url\":\"http://example.com/img/green.png\"}]}}";
 
         try {
@@ -157,29 +221,39 @@ public class WebHook implements CustomHttpHandlerCommand {
 
     public void way4() {
         System.out.println("\n-----------  way-4  -------------------\n");
-        String url = "https://fb-bot-java.herokuapp.com/hello";
+        //String url = "https://fb-bot-java.herokuapp.com/hello";
+        String url = "https://graph.facebook.com/v9.0/me/messages?access_token=EAAPIHznf4dgBAOw9R5YdnsPxX0frtpMc9hhGXXLnzZAgXPwWazNTUT3bc5A7EEcBt9iR3ZBRK3eDBnuZBhP7C5enCYUtblGgDLonFrbbv7CApYLlruNqw7X19btDELLvpld6CVEY9RDK7c46MTGP1WozXOa0Dd9UHZA7NYr7vAZDZD";
+
         String urlParameters = "data={\"snippet\":{\"channelId\":\"UCLGnG6SffG60QKqw-PuCjng\",\"videoId\":\"dTUPnrAZESU\",\"topLevelComment\":{\"snippet\":{\"textOriginal\":\"Test comment\"}}}}";
-        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        String urlParameters2 = "{\"recipient\":{\"id\":\"4080977395248736\"},\"messaging_type\": \"RESPONSE\",\"message\":{\"text\": \"Pick a color:\",\"quick_replies\":[{\"content_type\":\"text\",\"title\":\"Red\",\"payload\":\"<POSTBACK_PAYLOAD>\",\"image_url\":\"http://example.com/img/red.png\"},{\"content_type\":\"text\",\"title\":\"Green\",\"payload\":\"<POSTBACK_PAYLOAD>\",\"image_url\":\"http://example.com/img/green.png\"}]}}";
+
+        byte[] postData = urlParameters2.getBytes(StandardCharsets.UTF_8);
         HttpURLConnection con;
 
         try {
             URL myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
-            con.setDoOutput(true);
             con.setRequestMethod("POST");
-            con.setRequestProperty("Authorization", "Bearer ");
-            con.setRequestProperty("Accept", "application/json'");
-            con.setRequestProperty("Content-Type", "application/json'");
-            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
-                wr.write(postData);
+            //con.setRequestProperty("Authorization", "Bearer ");
+            con.setRequestProperty("Content-Type", "application/json; utf-8");
+            con.setRequestProperty("Accept", "application/json");
+            con.setDoOutput(true);
+            try(OutputStream os = con.getOutputStream()) {
+                byte[] input = urlParameters2.getBytes("utf-8");
+                os.write(input, 0, input.length);
+                os.flush();
+                os.close();
             }
-            StringBuilder content;
+//            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
+//                wr.write(postData);
+//                wr.flush();
+//            }
 
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
+            StringBuilder content = new StringBuilder();
+
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                 String line;
-                content = new StringBuilder();
                 while ((line = br.readLine()) != null) {
                     content.append(line);
                     content.append(System.lineSeparator());
@@ -196,6 +270,8 @@ public class WebHook implements CustomHttpHandlerCommand {
             e.printStackTrace();
         } finally {
         }
+
+        System.out.println("----- finished");
     }
 }
 
