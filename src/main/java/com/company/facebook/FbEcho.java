@@ -18,10 +18,10 @@ public class FbEcho extends Command {
                 "    \"quick_replies\":[\n" +
                 "      {\n" +
                 "        \"content_type\":\"text\",\n" +
-                "        \"title\":\"Red\",\n" +
+                "        \"title\":\"Red\"\n" +
                 "      },{\n" +
                 "        \"content_type\":\"text\",\n" +
-                "        \"title\":\"Green\",\n" +
+                "        \"title\":\"Green\"\n" +
                 "      }\n" +
                 "    ]\n" +
                 "  }\n" +
